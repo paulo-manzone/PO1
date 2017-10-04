@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    
+}
+
+#navbar1{
+    background-color: black;
+    color: white;
+    height: 10vh;
+}
+
+a{
+    color: white;
+}
+a:hover{
+    text-decoration: none;
+    color: azure;
+}
+
+#content{
+    background-color: aliceblue;
+    font-size: 100 px;
+    font-family: sans-serif, cursive;
+    font-weight: bold;
+    line-height: 40px;
+    height: 90vh;
+    margin-left: 10vh;
+    margin-right: 10vh;
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+}
+
