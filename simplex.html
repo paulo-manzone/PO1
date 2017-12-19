@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Pesquisa Operacional I</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="css/style.css"></link>
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/script.js"></script>
+        
+    
+    </head>
+    
+    <body>
+
+        <nav id="navbar1" class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="#">Pesquisa Operacional I   -   Paulo Eduardo Manzone Maia  -  161022261</a>
+                </div>
+                <ul id="opcoes" class="nav navbar-nav">
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="#">Simplex</a></li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div id="controle">
+            <h1><center>SIMPLEX</center></h1><br>
+            <p class = "lbl">Numero de restricoes:</p>
+            <input type="text" name="restricoes" id="r" value="2">
+            <p class = "lbl">Numero de variaveis:</p>
+            <input type="text" name="variaveis" id="v" value="2"><br>
+            <p class = "lbl">Tipo de problema:  </p>
+            Minimizar <input type="range" id="tipo" min="0" max="10" step="10"> Maximizar
+            <input class ="lbl" type="button" id="botaograde" name="criagrade" value="Criar grades"> 
+        </div>
+
+
+        <div id="tabela">
+
+        </div>
+    </body>
+    
+    
+</html>
