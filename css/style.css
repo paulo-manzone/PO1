@@ -83,3 +83,12 @@ input {
     background-color: #223033; 
     color: white;
 }
+
+table {
+    border: 1px solid black;
+    padding: 15px;
+}
+td {
+    border: 1px solid black;
+    text-align: center; 
+}

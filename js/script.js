@@ -21,6 +21,7 @@ var sobra = [];		//Vetor das variáveis de excesso
 var infinito = 999999999999;
 var indice;
 var pivoi, pivoj, pivo;
+var tabela;
 //====================================================================================
 //						
 //====================================================================================
@@ -83,6 +84,8 @@ $(document).ready(function(){
 	$(document).on('click','#botaolimpa',function(){
 
 		$("#botaograde").trigger('click');
+		$("#resultados").empty();
+
 	});
 
 	//======================================================================Botão ir===========================================================
@@ -234,9 +237,9 @@ function simplex(){
 			}
 		}
 		if(!indice){
-			alert("B");
+			//alert("B");
 			//verificaCond();
-			return;
+			return 1;
 		}
 
 		//calcular b/a
@@ -258,50 +261,102 @@ function simplex(){
 		pivoj = indice;
 
 		if(!pivoi){
-			alert("A");
-			// faz alguma coisa aqui -=-=--=
-			return;
+			//alert("A");
+			return 1;
 		}
 		
+		mostraTabela();
 
 		//pivotamento
 		pivo = matriz[pivoi][pivoj]
 		for(j=1; j<=n; j++){
-			matriz[pivoi][j] = matriz[pivoi][j]/pivo; 
+			matriz[pivoi][j] /= pivo;
 		}
+		b[pivoi] /= pivo;
 
 		for(i=1; i<=m; i++){
 			pivo = matriz[i][pivoj];
 			for(j=1; j<=n && i!=pivoi; j++){
 				matriz[i][j] -= matriz[pivoi][j] * pivo;
+				console.log("matriz["+i+"]["+j+"] = "+matriz[i][j]);
 			}
+			if(i!=pivoi) b[i] -= b[pivoi] * pivo;
 		}
+
+		basicas[pivoi] = pivoj;
+
+
 
 	}while(true);
 
-	
 
 
+	// console.log("custo");
+	// console.log(custo);
+	// console.log("basicas");
+	// console.log(basicas);
+	// console.log("matriz");
+	// console.log(matriz);
+	// console.log("cr");
+	// console.log(cr);
+	// console.log("artificial");
+	// console.log(artificial);
+	// console.log("sobra");
+	// console.log(sobra);
 
-	console.log("custo");
-	console.log(custo);
-	console.log("basicas");
-	console.log(basicas);
-	console.log("matriz");
-	console.log(matriz);
-	console.log("cr");
-	console.log(cr);
-	console.log("artificial");
-	console.log(artificial);
-	console.log("sobra");
-	console.log(sobra);
 
 }
 
-	//Mostrando resultado
-	console.log("Resultado: ")
-	for(i=1; i<=basicas.length; i++){
-		console.log(b[basicas[i]]);
+	function logResultado(){
+		//Mostrando resultado
+		console.log("Resultado: ")
+		for(i=1; i<=basicas.length; i++){
+			console.log(b[basicas[i]]);
+		}
+		mostraTabela();
+	}
+	
+
+	function mostraTabela(){
+		tabela = "<table>"
+		tabela +="<tr>"
+		tabela +="<td>variaveis</td>";
+		//Nome das variaveis
+		for(j=1; j<=n; j++){
+			tabela += "<td> x" + j + "</td>"; 
+		}
+		tabela +="</tr><tr>";
+
+		//Custo das variáveis
+		tabela +="<td>base/custo</td>";
+		for(j=1; j<=n; j++){
+			tabela+= "<td>" + custo[j] + "</td>";
+		}
+		tabela+="<td>b</td><td>b/a</td>";
+		tabela +="</tr>";
+
+		//Matriz A
+		for(i=1; i<=m; i++){
+			tabela+="<tr>";
+			tabela+="<td> x" + basicas[i] + "</td>"; 
+			for(j=1; j<=n; j++){
+				tabela += "<td>" + matriz[i][j] + "</td>"; 
+			}
+			tabela+="<td>"+b[i]+"</td>";
+			tabela+="<td>"+ba[i]+"</td>";
+			tabela+="</tr>";
+		}
+		tabela+="<tr>";
+		tabela+="<td>cr</td>";
+		for(j=1; j<=n; j++){
+			tabela+="<td>" + cr[j] + "</td>";
+		}
+		tabela+="</tr>";
+		tabela += "</table>"
+
+		$("#resultados").css("background-color", "light-blue");
+		$("#resultados").append(tabela);
+		$("#resultados"). append("<br><br><br>")
 	}
 
 
@@ -317,4 +372,6 @@ function simplex(){
 
 function chamada(){
 	simplex();
+	$("#resultados").append("<br><br><h1 align='left'>Resultado</h1>");
+	logResultado();
 }
